@@ -17,6 +17,7 @@ header {
 header h1 {
  margin: 0 0 10px 0;
  font-weight: 700;
+ text-align: center;
 }
 
 nav ul {
@@ -52,9 +53,39 @@ main h2 {
  color: #42026d;
  font-weight: 700;
  margin-bottom: 15px;
+ text-align: center;
+}
+main h3 {
+ color: #42026d;
+ font-weight: 700;
+ margin-bottom: 15px;
+ text-align: center;
 }
 
 main p {
  font-size: 18px;
  line-height: 1.6;
+ text-align: center;
+}
+.container {
+ max-width: 300px;
+ margin: 0 auto;
+ text-align: center;
+}
+input[type="number"] {
+ width: 100%;
+ padding: 8px;
+ font-size: 16px;
+ margin-bottom: 10px;
+}
+button {
+ padding: 10px 20px;
+ font-size: 16px;
+ cursor: pointer;
+}
+#result {
+ margin-top: 15px;
+ font-weight: bold;
+ font-size: 18px;
+ color: #333;
 }
