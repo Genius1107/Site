@@ -1,55 +1,38 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>Яневан — Главная</title>
-  <link rel="stylesheet" href="site.css">
-</head>
-<body>
-  <header>
-    <h1>Банк "Яневан"</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Главная</a></li>
-        <li><a href="catalog.html">Каталог</a></li>
-        <li><a href="register.html">Форма регистрации</a></li>
-        <li><a href="promo.html">Акции</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <h2>Добро пожаловать в банк "Яневан"</h2>
-    <h3>Рассчитайте процент ежемесячный платеж по ипотеке</h3>
-    <div class="container">
-      <input class="sum" type="number" placeholder="Введите сумму, которую хотите взять" />
-      <input class="time" type="number" placeholder="Введите срок (в годах)" />
-      <p class="percent">Ваша процентная ставка: 20%</p>
-       <label>
-    <input type="checkbox" class="termsCheckbox" />
-    Я согласен с условиями обработки данных
-      </label>
-      <p id="errorMsg" style="color:red; margin-top:10px;"></p><br>
-      <button class="button">Рассчитать</button>
-      <div class="result"></div>
-    </div>
-  </main>
-  <script>
-    window.onload = function() {
-      const button = document.querySelector('.button');
-      const termsCheckbox = document.querySelector('.termsCheckbox');  // Получаем элемент checkbox
-      const errorMsg = document.getElementById('errorMsg'); // Получаем элемент для вывода ошибки
+document.addEventListener('DOMContentLoaded', () => {More actions
+ const sumInput = document.querySelector('.sum');
+ const timeInput = document.querySelector('.time');
+ const percentP = document.querySelector('p.percent');
+ const button = document.querySelector('.button');
+ const resultDiv = document.querySelector('.result');
 
-      button.addEventListener('click', function() {
-        if (!termsCheckbox.checked) { // Проверяем, установлена ли галочка
-          errorMsg.textContent = "Необходимо согласиться с условиями обработки данных"; // Выводим сообщение об ошибке
-          return; // Прекращаем выполнение функции, если галочка не установлена
-        }
+ const annualInterestRate = 20; // 20% годовых
 
-        errorMsg.textContent = ""; // Очищаем сообщение об ошибке, если галочка установлена
-        alert("Мы всегда рады вам помочь"); // Сообщение, если все в порядке
-      });
-    }
-  </script>
-  <script src="site.js"></script>
-</body>
-</html>
+ button.addEventListener('click', () => {
+   const principal = parseFloat(sumInput.value);
+   const years = parseInt(timeInput.value);
+
+   if (isNaN(principal) || principal <= 0) {
+     resultDiv.textContent = 'Пожалуйста, введите корректную сумму кредита.';
+     resultDiv.style.color = 'red';
+     return;
+   }
+
+   if (isNaN(years) || years <= 0) {
+     resultDiv.textContent = 'Пожалуйста, введите корректный срок в годах.';
+     resultDiv.style.color = 'red';
+     return;
+   }
+
+   // Обновляем текст процентной ставки
+   percentP.textContent = 'Ваша процентная ставка:'+ annualInterestRate + '%';
+
+   const monthlyInterestRate = annualInterestRate / 100 / 12;
+   const numberOfPayments = years * 12;
+
+   const monthlyPayment = principal * (monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments)) /
+     (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+
+   resultDiv.style.color = 'black';More actions
+   resultDiv.textContent = 'Ваш ежемесячный платеж:'+ monthlyPayment.toFixed(2) +'₽';
+ });
+})
