@@ -21,32 +21,50 @@
     <h2>Добро пожаловать в банк "Яневан"</h2>
     <h3>Рассчитайте процент ежемесячный платеж по ипотеке</h3>
     <div class="container">
-      <input class="sum" type="number" placeholder="Введите сумму, которую хотите взять" />
-      <input class="time" type="number" placeholder="Введите срок (в годах)" />
+      <input class="sum" type="number" placeholder="Введите сумму, которую хотите взять" id="loanAmount" />
+      <input class="time" type="number" placeholder="Введите срок (в годах)" id="loanTerm" />
       <p class="percent">Ваша процентная ставка: 20%</p>
        <label>
-    <input type="checkbox" class="termsCheckbox" />
+    <input type="checkbox" class="termsCheckbox" id="termsCheckbox" />
     Я согласен с условиями обработки данных
       </label>
       <p id="errorMsg" style="color:red; margin-top:10px;"></p><br>
-      <button class="button">Рассчитать</button>
-      <div class="result"></div>
+      <button class="button" id="calculateButton">Рассчитать</button>
+      <div class="result" id="monthlyPayment"></div>
     </div>
   </main>
   <script>
     window.onload = function() {
-      const button = document.querySelector('.button');
-      const termsCheckbox = document.querySelector('.termsCheckbox');  // Получаем элемент checkbox
-      const errorMsg = document.getElementById('errorMsg'); // Получаем элемент для вывода ошибки
+      const calculateButton = document.getElementById('calculateButton');
+      const termsCheckbox = document.getElementById('termsCheckbox');
+      const errorMsg = document.getElementById('errorMsg');
+      const monthlyPaymentElement = document.getElementById('monthlyPayment');
+      const loanAmountInput = document.getElementById('loanAmount');
+      const loanTermInput = document.getElementById('loanTerm');
 
-      button.addEventListener('click', function() {
-        if (!termsCheckbox.checked) { // Проверяем, установлена ли галочка
-          errorMsg.textContent = "Необходимо согласиться с условиями обработки данных"; // Выводим сообщение об ошибке
-          return; // Прекращаем выполнение функции, если галочка не установлена
+      calculateButton.addEventListener('click', function() {
+        const loanAmount = parseFloat(loanAmountInput.value);
+        const loanTermYears = parseFloat(loanTermInput.value);
+
+        if (!termsCheckbox.checked) {
+          errorMsg.textContent = "Необходимо согласиться с условиями обработки данных";
+          return;
         }
 
-        errorMsg.textContent = ""; // Очищаем сообщение об ошибке, если галочка установлена
-        alert("Мы всегда рады вам помочь"); // Сообщение, если все в порядке
+        errorMsg.textContent = "";
+
+        if (isNaN(loanAmount) || isNaN(loanTermYears) || loanAmount <= 0 || loanTermYears <= 0) {
+          errorMsg.textContent = "Пожалуйста, введите корректные значения суммы и срока кредита.";
+          return;
+        }
+        //Расчет ежемесячного платежа
+        const annualInterestRate = 0.20;
+        const monthlyInterestRate = annualInterestRate / 12;
+        const loanTermMonths = loanTermYears * 12;
+
+        const monthlyPayment = (loanAmount * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -loanTermMonths));
+
+        monthlyPaymentElement.textContent = "Ежемесячный платеж: " + monthlyPayment.toFixed(2) + " рублей";
       });
     }
   </script>
