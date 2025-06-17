@@ -36,8 +36,17 @@
   <script>
     window.onload = function() {
       const button = document.querySelector('.button');
+      const termsCheckbox = document.querySelector('.termsCheckbox');  // Получаем элемент checkbox
+      const errorMsg = document.getElementById('errorMsg'); // Получаем элемент для вывода ошибки
+
       button.addEventListener('click', function() {
-        alert("Мы всегда рады вам помочь");
+        if (!termsCheckbox.checked) { // Проверяем, установлена ли галочка
+          errorMsg.textContent = "Необходимо согласиться с условиями обработки данных"; // Выводим сообщение об ошибке
+          return; // Прекращаем выполнение функции, если галочка не установлена
+        }
+
+        errorMsg.textContent = ""; // Очищаем сообщение об ошибке, если галочка установлена
+        alert("Мы всегда рады вам помочь"); // Сообщение, если все в порядке
       });
     }
   </script>
