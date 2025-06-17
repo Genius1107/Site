@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
    resultDiv.textContent = 'Ваш ежемесячный платеж:'+ monthlyPayment.toFixed(2) +'₽';
  });
 })
- document.getElementById('submitBtn').addEventListener('click', function() {
+ document.getElementById('button').addEventListener('click', function() {
     const checkbox = document.getElementById('termsCheckbox');
     const errorMsg = document.getElementById('errorMsg');
     if (!checkbox.checked) {
