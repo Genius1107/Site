@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 })
  document.querySelector('button').addEventListener('click', function() {
     const checkbox = document.querySelector('termsCheckbox');
-    const errorMsg = document.querySelector('errorMsg');
+    const errorMsg = document.querySelector('#errorMsg');
     if (!checkbox.checked) {
       errorMsg.textContent = 'Необходимо согласиться с условиями';
     } else {
