@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
    resultDiv.textContent = 'Ваш ежемесячный платеж:'+ monthlyPayment.toFixed(2) +'₽';
  });
 })
- document.getElementById('button').addEventListener('click', function() {
-    const checkbox = document.getElementById('termsCheckbox');
-    const errorMsg = document.getElementById('errorMsg');
+ document.querySelector('button').addEventListener('click', function() {
+    const checkbox = document.querySelector('termsCheckbox');
+    const errorMsg = document.querySelector('errorMsg');
     if (!checkbox.checked) {
       errorMsg.textContent = 'Необходимо согласиться с условиями';
     } else {
