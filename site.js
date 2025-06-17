@@ -1,9 +1,4 @@
-  window.onload = function() {
-      const button = document.querySelector('.button');
-      button.addEventListener('click', function() {
-        alert("Мы всегда рады вам помочь");
-      });
-    }
+
 document.addEventListener('DOMContentLoaded', () => {More actions
  const sumInput = document.querySelector('.sum');
  const timeInput = document.querySelector('.time');
@@ -42,3 +37,9 @@ document.addEventListener('DOMContentLoaded', () => {More actions
    resultDiv.textContent = 'Ваш ежемесячный платеж:'+ monthlyPayment.toFixed(2) +'₽';
  });
 })
+  window.onload = function() {
+      const button = document.querySelector('.button');
+      button.addEventListener('click', function() {
+        alert("Мы всегда рады вам помочь");
+      });
+    }
